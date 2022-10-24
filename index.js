@@ -1,10 +1,14 @@
-const { app, dialog, BrowserWindow } = require('electron');
+const { app, dialog, BrowserWindow, ipcMain } = require('electron');
+const path = require('path')
 
 const html = `
 <html>
   <head>
     <title>Issue</title>
   </head>
+  <body style="display:flex;align-items:center;justify-content:center;">
+    <button id="btn">Open dialog</button>
+  </body>
 </html>
 `;
 const base64Str = Buffer.from(html).toString('base64');
@@ -12,8 +16,8 @@ const url = `data:text/html;base64,${base64Str}`;
 
 let mainWindow;
 
-function openDialog() {
-  dialog.showMessageBox(mainWindow, {
+async function openDialog() {
+  const { response } = await dialog.showMessageBox(mainWindow, {
     title: 'Electron',
     type: 'warning',
     message: 'Linux defect',
@@ -21,17 +25,21 @@ function openDialog() {
     cancelId: 2,
     buttons: ['One', 'Two', 'Cancel'],
   });
+  return response;
 }
+
+ipcMain.handle('open-dialog', openDialog);
 
 function ready() {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   });
   
   mainWindow.loadURL(url);
-
-  mainWindow.webContents.on('did-finish-load', openDialog);
 }
 
 app.whenReady().then(ready);
