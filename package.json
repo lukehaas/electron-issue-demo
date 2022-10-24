@@ -1,0 +1,23 @@
+{
+  "name": "electron-issue-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukehaas/electron-issue-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukehaas/electron-issue-demo/issues"
+  },
+  "homepage": "https://github.com/lukehaas/electron-issue-demo#readme",
+  "devDependencies": {
+    "electron": "21.2.0"
+  }
+}
