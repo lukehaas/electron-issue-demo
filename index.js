@@ -14,7 +14,7 @@ let mainWindow;
 
 function openDialog() {
   dialog.showMessageBox(mainWindow, {
-    title: 'RunJS',
+    title: 'Electron',
     type: 'warning',
     message: 'Linux defect',
     detail: 'Buttons are not clickable on Linux',
